@@ -455,7 +455,7 @@ class Background extends GroupOfPanels{
         this.movementDirection = 1
         this.stopInitial = setInterval(this.initialAnimation.bind(this), 50)
         this.currentBackground = 1
-        this.numberOfBackgrounds = 4
+        this.numberOfBackgrounds = 5
     }
 
     initialAnimation(){
