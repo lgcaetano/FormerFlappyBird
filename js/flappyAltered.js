@@ -3,6 +3,14 @@ function pixValue(string){
     return parseInt(string.slice(0, -2))
 }
 
+function subtractArray(arr1, arr2){
+    return arr1.filter(element => !arr2.includes(element))
+}
+
+
+
+
+
 function elementsOverlap(first, second){
     // console.log(first, second)
     const fBound = first.getBoundingClientRect()
@@ -32,13 +40,13 @@ function isNotInitialPanel(element){
 }
 
 function closeElementsAndChildren(element){
-    if(element != undefined){
-        element.style.display = 'none'
-        element.querySelectorAll('*').forEach(e => {
-            e.style.display = 'none'
-            closeElementsAndChildren(e)
-        })
-    }
+    element.style.display = 'none'
+    element.style.overflow = 'hidden'
+}
+
+function showElementsAndChildren(element){
+    element.style.display = 'flex'
+    element.style.overflow = 'visible'
 }
 
 
@@ -80,6 +88,7 @@ class Game{
         this.infoButton.onclick = () => this.showInfo()
         this.goBackButton = document.querySelector('#go-back')
         this.goBackButton.onclick = () => this.closeInfo()
+        document.querySelector('#background-select').onclick = () => this.background.changeBackground()
     }
     
     pauseGame(){
@@ -92,22 +101,43 @@ class Game{
     }
 
     showInfo(){
-        document.querySelectorAll('#pause *').forEach((element, index) =>{
-            console.log(element)
-            if(index > 2)
-                element.style.display = 'flex'
-            else
-                element.style.display = 'none'
+        // document.querySelectorAll('#pause *').forEach((element, index) =>{
+        //     console.log(element)
+        //     if(index > 2)
+        //         element.style.display = 'flex'
+        //     else
+        //         element.style.display = 'none'
+        // })
+
+        const info = document.querySelector('#info')
+        info.style.display = 'flex'
+        info.style.overflow = 'visible'
+        const infoArray = Array.from(document.querySelectorAll('#info, #info *, #pause-menu'))
+        console.log(typeof(infoArray.children))
+        const closeArray = subtractArray(Array.from(this.pauseMenu.children), infoArray)
+        closeArray.forEach(element => {
+            element.style.display = 'none'
+            element.style.overflow = 'hidden'
         })
     }
     
     closeInfo(){
-        document.querySelectorAll('#pause *').forEach((element, index) =>{
-            if(index <= 2 || index == 10)
-                element.style.display = 'flex'
-            else
-                element.style.display = 'none'
+        // document.querySelectorAll('#pause *').forEach((element, index) =>{
+        //     if(index <= 2 || index == 10)
+        //         element.style.display = 'flex'
+        //     else
+        //         element.style.display = 'none'
+        // })
+        const info = document.querySelector('#info')
+        info.style.display = 'none'
+        info.style.overflow = 'hidden'
+        const infoArray = Array.from(document.querySelectorAll('#info, #info *, #pause-menu'))
+        const openArray = subtractArray(Array.from(this.pauseMenu.children), infoArray)
+        openArray.forEach(element => {
+            element.style.display = 'flex'
+            element.style.overflow = 'visible'
         })
+
     }
 
 
@@ -130,7 +160,7 @@ class Game{
     openPauseMenu(){
         this.pauseMenu.style.display = 'flex'
         this.pauseMenu.querySelectorAll('*').forEach(element => {
-            if(element.id != 'info')
+            if(element.id != 'info' && element.id != 'background-menu')
                 element.style.display = 'flex'
         })
     }
@@ -421,8 +451,11 @@ class Obstacles extends GroupOfPanels{
 class Background extends GroupOfPanels{
     constructor(tag){
         super(tag)
+        this.imageTags = this.tag.querySelectorAll('img')
         this.movementDirection = 1
         this.stopInitial = setInterval(this.initialAnimation.bind(this), 50)
+        this.currentBackground = 1
+        this.numberOfBackgrounds = 4
     }
 
     initialAnimation(){
@@ -439,6 +472,13 @@ class Background extends GroupOfPanels{
         clearInterval(this.stopInitial)
     }
 
+    changeBackground(){
+        console.log("HERE")
+        this.currentBackground++
+        if(this.currentBackground > this.numberOfBackgrounds)
+            this.currentBackground = 1
+        this.imageTags.forEach(tag => tag.src = `imgs/background${this.currentBackground}.jpg`) 
+    }
 }
 
 
