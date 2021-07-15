@@ -441,7 +441,7 @@ class Obstacles extends GroupOfPanels{
         if(randomize == 1)
             panels.forEach(panel => this.randomizeGaps(panel))
 
-        this.stopMoving = setInterval(this.moveLeft.bind(this), timer)
+        this.stopMoving = setInterval(this.moveLeft.bind(this), timer/2)
     }
     
 
