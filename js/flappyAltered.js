@@ -407,7 +407,7 @@ class GroupOfPanels{
         if(curPosition <= this.minPosition){
             this.reposition()
         } else {
-            this.tag.style.left = `${curPosition - 1}px`
+            this.tag.style.left = `${curPosition - 2}px`
         }
     }
 
@@ -436,12 +436,14 @@ class Obstacles extends GroupOfPanels{
     }
 
     startAnimating(timer, randomize = 1){
+        let speed = 1.5
         const panels = document.querySelectorAll('.obstacle-panel')
 
         if(randomize == 1)
             panels.forEach(panel => this.randomizeGaps(panel))
 
-        this.stopMoving = setInterval(this.moveLeft.bind(this), timer/2)
+        this.stopMoving = setInterval(this.moveLeft.bind(this), timer*speed)
+        console.log(speed)
     }
     
 
