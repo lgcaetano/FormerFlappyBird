@@ -106,7 +106,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc((100% - 200px) / 2);
+    height: calc((100% - 175px) / 2);
     align-items: center;
 }
 

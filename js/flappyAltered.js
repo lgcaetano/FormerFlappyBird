@@ -407,7 +407,7 @@ class GroupOfPanels{
         if(curPosition <= this.minPosition){
             this.reposition()
         } else {
-            this.tag.style.left = `${curPosition - 2}px`
+            this.tag.style.left = `${curPosition - 1}px`
         }
     }
 
@@ -429,14 +429,14 @@ class Obstacles extends GroupOfPanels{
     randomizeGaps(panel){
         const tunnelGaps = panel.querySelectorAll('.tunnel-gap')
         let capHeight = document.querySelector('.cap').clientHeight + 6 // 6 é o dobro do tamanho da borda
-        let maxMovement = (this.windowHeight - 200 - 2 * capHeight) / 2
+        let maxMovement = (this.windowHeight - 175 - 2 * capHeight) / 2
         tunnelGaps.forEach(gap => {
             gap.style.top = `${-this.windowHeight + randomNumberBetween(-maxMovement, maxMovement)}px`
         })
     }
 
     startAnimating(timer, randomize = 1){
-        let speed = 1.5
+        let speed = 0.8
         const panels = document.querySelectorAll('.obstacle-panel')
 
         if(randomize == 1)
