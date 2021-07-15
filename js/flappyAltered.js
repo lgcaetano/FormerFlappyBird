@@ -113,7 +113,7 @@ class Game{
         info.style.display = 'flex'
         info.style.overflow = 'visible'
         const infoArray = Array.from(document.querySelectorAll('#info, #info *, #pause-menu'))
-        console.log(typeof(infoArray.children))
+        // console.log(typeof(info.children))
         const closeArray = subtractArray(Array.from(this.pauseMenu.children), infoArray)
         closeArray.forEach(element => {
             element.style.display = 'none'
@@ -131,8 +131,8 @@ class Game{
         const info = document.querySelector('#info')
         info.style.display = 'none'
         info.style.overflow = 'hidden'
-        const infoArray = Array.from(document.querySelectorAll('#info, #info *, #pause-menu'))
-        const openArray = subtractArray(Array.from(this.pauseMenu.children), infoArray)
+        // const infoArray = Array.from(document.querySelectorAll('#info, #info *, #pause-menu, #background-menu'))
+        const openArray = document.querySelectorAll('#pause-options') 
         openArray.forEach(element => {
             element.style.display = 'flex'
             element.style.overflow = 'visible'
