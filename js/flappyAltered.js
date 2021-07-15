@@ -142,13 +142,15 @@ class Game{
 
 
     unpauseGame(){
-        this.bird.setMaxHeight()
-        this.obstaculos.startAnimating(5, 0)
-        this.background.stopInitialAnimation()
-        this.background.startAnimating(20)
-        this.bird.startAnimating()
-        this.stopCollisionDetection = setInterval(this.collisionDetection.bind(this), 10)
-        // this.pauseMenu.style.display = 'none'
+        if(this.gameHasStarted){
+            this.bird.setMaxHeight()
+            this.obstaculos.startAnimating(5, 0)
+            this.background.stopInitialAnimation()
+            this.background.startAnimating(20)
+            this.bird.startAnimating()
+            this.stopCollisionDetection = setInterval(this.collisionDetection.bind(this), 10)
+            // this.pauseMenu.style.display = 'none'
+        }
         this.closePauseMenu()
     }
 
@@ -283,7 +285,7 @@ class Game{
 
     gameOver(){
         this.gameHasStarted = 0
-        this.pauseButton.classList.remove('displayed')
+        // this.pauseButton.classList.remove('displayed')
         clearInterval(this.stopCollisionDetection)
         this.restartMenu.style.zIndex = '10'
         this.gameOverAnimation()
