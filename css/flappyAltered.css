@@ -253,7 +253,7 @@ body{
     width: 50px;
     position: absolute;
     left: 10px;
-    top: -40px;
+    top: -50px;
     font-size: 50px;
     z-index: 10;
     display: flex;
@@ -262,12 +262,16 @@ body{
 }
 
 #pause-button.displayed{
-    transform: translateY(50px);
+    transform: translateY(60px);
 }
 
 
 #pause-button:hover{
     cursor: pointer;
+}
+
+#pause-button img{
+    width: 100%;
 }
 
 .bar{
