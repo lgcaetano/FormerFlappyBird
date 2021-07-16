@@ -59,7 +59,6 @@ class Game{
         this.bird = new Bird
         this.bird.tag.style.left = `${(this.tag.clientWidth - this.bird.tag.clientWidth) / 2}px`
         this.bird.tag.style.top = `${(this.tag.clientHeight - this.bird.tag.clientHeight) / 2}px`
-        this.tag.onmousedown = () => this.bird.accelerate()
         this.gameHasStarted = 0
         this.tunnelsAndCaps = document.querySelectorAll('.tunnel *')
         this.scoreBoard = document.querySelector('#scoreboard')
@@ -205,6 +204,7 @@ class Game{
             this.bird.startAnimating()
             this.stopCollisionDetection = setInterval(this.collisionDetection.bind(this), 10)
             this.startingAnimation()
+            this.tag.onmousedown = () => this.bird.accelerate()
         }        
     }
     
@@ -341,6 +341,7 @@ class Bird{
     }
     
     initialAnimation(){
+
         let bottom = this.areaDoJogo.clientHeight * 3/4
         let top = this.areaDoJogo.clientHeight - bottom
         if(this.belowTop(top) && this.aboveBottom(bottom))
